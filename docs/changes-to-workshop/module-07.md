@@ -1,73 +1,35 @@
-Change all
-```
-SET @@location='us-central1';
-```
-Into 
-```
-SET @@location='asia-southeast3';
-```
+# 7. Connect BigQuery to the Storage Bucket
+If you look in the bucket you created earlier, you will find a set of media files related to each pet.
+
+![Cloud Storage](../../assets/module-07/01.gif)
+
+BigQuery has the capability to read into these buckets and use the files alongside data in tables. This value type is called ObjectRef.
+
+Get the service account id for the connection you created earlier by clicking on it under External connections.
+
+![BigQuery Connection](../../assets/module-07/02.png)
+Copy the service account id.
+
+Navigate to the IAM Admin console in a new browser tab ( https://console.cloud.google.com/iam-admin/ ).
+
+Grant the service account with Storage Object Viewer and Vertex AI User (you will use this permission later).
+![IAM Admin](../../assets/module-07/03.png)
+
+Click Save and 🕰️ wait a couple of minutes.
+
+Back in the BigQuery tab, use the following query in BigQuery studio to test the connection between BigQuery and the storage bucket.
+
+Replace <<PROJECT_ID>> with your project ID.
+
+
 
 ```
 SET @@location='asia-southeast3';
-SELECT OBJ.FETCH_METADATA(OBJ.MAKE_REF('gs://<<PROJECT_ID>>-petverse/yoda_profile_picture.png', 'projects/<<PROJECT_ID>>/locations/us-central1/connections/pet-connection'))
+SELECT OBJ.FETCH_METADATA(OBJ.MAKE_REF('gs://<<PROJECT_ID>>-petverse/yoda_profile_picture.png', 'projects/<<PROJECT_ID>>/locations/asia-southeast3/connections/pet-connection'))
 ```
+Click View Results. You should get the metadata in the results:
 
-```
-SELECT name,
-AI.GENERATE(
-   prompt=> ('What are this pet\'s favorite toy and favorite foods', additional_media ),
-    connection_id => 'asia-southeast3.pet-connection',
-    endpoint => 'https://aiplatform.googleapis.com/v1/projects/affable-album-486805/locations/global/publishers/google/models/gemini-2.5-flash',
-output_schema => 'food STRING, toy STRING')
-FROM petverse.pets
-WHERE name = 'Rocky'
+![Result](../../assets/module-07/04.png)
 
-```
-
-or if you would like to try Gemini 3 Flash Preview
-```
-SELECT name,
-AI.GENERATE(
-   prompt=> ('What are this pet\'s favorite toy and favorite foods', additional_media ),
-    connection_id => 'asia-southeast3.pet-connection',
-    endpoint => 'https://aiplatform.googleapis.com/v1/projects/affable-album-486805/locations/global/publishers/google/models/gemini-3-flash-preview',
-output_schema => 'food STRING, toy STRING')
-FROM petverse.pets
-WHERE name = 'Rocky'
-```
-
-```
-UPDATE petverse.pets AS p
-SET FavoriteFood = aigen.food
-FROM
-  (
-    SELECT Id, name,
-          AI.GENERATE(
-                prompt=> ('What are this pet\'s favorite toy and favorite foods', additional_media ),
-                connection_id => 'asia-southeast3.pet-connection',
-                endpoint => 'https://aiplatform.googleapis.com/v1/projects/affable-album-486805/locations/global/publishers/google/models/gemini-2.5-flash',
-                output_schema => 'food STRING').food
-    FROM petverse.pets ) AS  aigen
-WHERE p.Id = aigen.Id
-AND p.FavoriteFood IS NULL
-AND p.additional_media IS NOT NULL
-
-```
-
-```
-ALTER TABLE petverse.pets ADD COLUMN MediaDescription STRING;
-UPDATE petverse.pets AS p
-SET MediaDescription = aigen.description
-FROM
-  (
-    SELECT Id, name,
-          AI.GENERATE(
-                prompt=> ('Create a description in an epic tone for this pet based on these media: ', additional_media ),
-                connection_id => 'asia-southeast3.pet-connection',
-                endpoint => 'https://aiplatform.googleapis.com/v1/projects/affable-album-486805/locations/global/publishers/google/models/gemini-2.5-flash',
-                output_schema => 'description STRING').description
-    FROM petverse.pets ) AS  aigen
-WHERE p.Id = aigen.Id
-AND p.MediaDescription IS NULL
-AND p.additional_media IS NOT NULL
-```
+> [!IMPORTANT]
+> ⚠️ : If you see any errors, please correct them before continuing

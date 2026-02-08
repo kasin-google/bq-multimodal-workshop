@@ -1,4 +1,4 @@
-# Workshop Update Overview (TH Region Launch Hands-On Labs)
+# Build Multimodal Apps with BigQuery and AI Workshop Overview (TH Region Launch Hands-On Labs)
 
 This directory contains updated instructions and supplemental information for the ["Build Multimodal Apps with BigQuery and AI"](https://codelabs.developers.google.com/devsite/codelabs/petverse_multimodal) workshop. 
 
@@ -6,7 +6,12 @@ This directory contains updated instructions and supplemental information for th
 
 - [Module 4: Create a helper script](./module-04.md) - Create a helper script to set up the environment variables and project ID.
 - [Module 5: Create a storage bucket](./module-05.md) - Create a storage bucket to store images, video clips, and audio files.
-- [Module 7: Empower your App with Google Gemini](./module-07.md) - Migrating to Gemini 2.5 Flash and using the revamped Cloud Run Functions UI.
+- [Module 6: Create the pets table](./module-06.md) - Create a table in BigQuery to store information about your pets.
+- [Module 7: Connect BigQuery to the Storage Bucket](./module-07.md) - Use Gemini to generate descriptions and extract information from media.
+- [Module 8: Add the storage media to your structured data](./module-08.md) - Add the storage media to your structured data.
+- [Module 9: Generate descriptions of pets](./module-09.md) - Generate descriptions of pets using Gemini.
+- [Module 10: Create embeddings](./module-10.md) - Create embeddings of pets using Gemini.
+
 
 ## Settings
 
