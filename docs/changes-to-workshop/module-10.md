@@ -2,6 +2,7 @@
 Create a table to store the embeddings for the profile pictures and for the descriptions and hobbies to use in a semantic search. We will find similarities within pets using vector searches.
 ![Embedding Space](../../assets/module-10/embedding-space.png)
 
+
 ## Create embeddings for profile pictures
 ```
 CREATE OR REPLACE TABLE petverse.profile_embeddings
@@ -15,6 +16,10 @@ SELECT
  Id
 FROM petverse.pets;
 ```
+
+> [!IMPORTANT]
+> Note the Embedding model endpoint can use region `asia-southeast1` while storing the data and utilizing the connection from `asia-southeast3`.
+
 Check the new table from the results tab.
 ![Result](../../assets/module-10/01.png)
 
