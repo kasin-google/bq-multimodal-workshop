@@ -5,7 +5,7 @@ The access to the multimedia requires a connection, which you created in the beg
 
 Paste the following commands into a BigQuery SQL console and execute them to add two columns to your pets table.
 
-```
+```sql
 ALTER TABLE petverse.pets
 ADD COLUMN IF NOT EXISTS profile_picture STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>,
 ADD COLUMN IF NOT EXISTS additional_media ARRAY<STRUCT<uri STRING, version STRING, authorizer STRING, details JSON>>;
@@ -16,7 +16,7 @@ Copy the following statements and replace the place holder for PROJECT_ID with y
 > 💡 : Use Ctrl/Command + H to replace all values
 
 
-```
+```sql
 SET @@location='asia-southeast3';
 
 UPDATE petverse.pets
@@ -90,7 +90,7 @@ Run the statement. You should see successful executions after a few minutes:
 
 Check the results using the table preview. You should see the metadata for existing profile pictures and additional media for the cat called Pixel.
 
-```
+```sql
 SELECT *
 FROM `petverse.pets`
 WHERE name = 'Pixel'

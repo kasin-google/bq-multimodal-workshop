@@ -11,7 +11,7 @@ You can now create a table using the data in the file pets.csv. This file contai
 Copy the following code into a new SQL query to create a physical table and load the data.
 
 
-```
+```sql
 LOAD DATA INTO petverse.pets
 OPTIONS(
     description="Table for furry friend data"

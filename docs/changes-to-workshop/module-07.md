@@ -23,7 +23,7 @@ Replace <<PROJECT_ID>> with your project ID.
 
 
 
-```
+```sql
 SET @@location='asia-southeast3';
 SELECT OBJ.FETCH_METADATA(OBJ.MAKE_REF('gs://<<PROJECT_ID>>-petverse/yoda_profile_picture.png', 'projects/<<PROJECT_ID>>/locations/asia-southeast3/connections/pet-connection'))
 ```

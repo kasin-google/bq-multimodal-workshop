@@ -4,7 +4,7 @@ Create a table to store the embeddings for the profile pictures and for the desc
 
 
 ## Create embeddings for profile pictures
-```
+```sql
 CREATE OR REPLACE TABLE petverse.profile_embeddings
 AS
 SELECT
@@ -24,7 +24,7 @@ Check the new table from the results tab.
 ![Result](../../assets/module-10/01.png)
 
 ## Create embeddings for text
-```
+```sql
 CREATE OR REPLACE TABLE petverse.text_embeddings
 AS
 SELECT embedding_result.result as embedding_result, content, Id, Name
@@ -67,7 +67,7 @@ The default dataset has similar pets in it. Here are two examples Pixel (Id: 3) 
 You can use the distance between the embeddings to calculate similar pets:
 
 
-```
+```sql
 
 SELECT 
 t1.id AS pet_id,
@@ -97,7 +97,7 @@ Here's a picture of Joel for reference:
 
 ## Try semantic search
 You can use the VECTOR_SEARCH function to semantically search across text embeddings. If this table was larger, you would need to create and index for the embeddings.
-```
+```sql
 SELECT query.query, base.content, base.Name
 FROM
  VECTOR_SEARCH(

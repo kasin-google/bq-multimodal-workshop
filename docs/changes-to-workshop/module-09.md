@@ -5,12 +5,12 @@ The answers to these questions may be in the videos and audios related to these 
 
 Test this with the following statement:
 
-```
+```sql
 SELECT 'What are this pet\'s favorite toy and favorite foods', additional_media 
 FROM petverse.pets
 ```
 
-```
+```sql
 SELECT name,
 AI.GENERATE(
    prompt=> ('What are this pet\'s favorite toy and favorite foods', additional_media ),
@@ -23,7 +23,7 @@ WHERE name = 'Rocky'
 ```
 
 or if you would like to try Gemini 3 Flash Preview
-```
+```sql
 SELECT name,
 AI.GENERATE(
    prompt=> ('What are this pet\'s favorite toy and favorite foods', additional_media ),
@@ -38,7 +38,7 @@ You can see Rocky's video in your storage bucket.
 Use the following statement to update the missing descriptions:
 
 
-```
+```sql
 UPDATE petverse.pets AS p
 SET FavoriteFood = aigen.food
 FROM
@@ -58,7 +58,7 @@ AND p.additional_media IS NOT NULL
 Use the following statement to create a description of the pets based on their multimedia into a new column:
 
 
-```
+```sql
 ALTER TABLE petverse.pets ADD COLUMN MediaDescription STRING;
 UPDATE petverse.pets AS p
 SET MediaDescription = aigen.description
